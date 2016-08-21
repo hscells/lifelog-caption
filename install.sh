@@ -13,7 +13,7 @@ export CC=/usr/local/bin/gcc-6
 export CXX=/usr/local/bin/g++-6
 
 # I'm using zsh, so you'll need to change `zsh` to `bash` if you're not using zsh.
-curl -s https://raw.github.com/torch/ezinstall/master/install-all | zsh
+curl -s https://raw.githubusercontent.com/torch/ezinstall/master/install-all | zsh
 
 # hopefully you've gotten this far ~
 luarocks install nn
