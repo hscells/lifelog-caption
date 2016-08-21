@@ -30,7 +30,8 @@ def export_json(dataset, images_path, output):
     data = []
     for row in results:
         id, caption = row
-        data.append({'file_path': images_path + lookup[id], 'captions': [caption]})
+        if len(caption.strip()) > 0:
+            data.append({'file_path': images_path + lookup[id], 'captions': [caption]})
     cursor.close()
 
     with open(output, 'w') as f:
