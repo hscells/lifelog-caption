@@ -16,7 +16,6 @@ def export_json(dataset, images_path, output):
         id = path.split('/')[-1].split('.')[0]
         lookup[id] = path
 
-    print(lookup)
 
     print("Connecting...")
     conn = pg8000.connect(user=os.environ.get("LIFELOG_DB_USER"),
