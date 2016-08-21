@@ -3,4 +3,4 @@
 #############################################################################
 
 python get-training-data.py $1 $2 $3 &&
-python neuraltalk2-master/prepro.py --input_json $3 $4
+python neuraltalk2-master/prepro.py --input_json $3 --num_val $4
