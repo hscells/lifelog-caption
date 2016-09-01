@@ -52,4 +52,4 @@ if __name__ == '__main__':
     argparser.add_argument('output', help='The file to output the json data to')
     args = argparser.parse_args()
 
-    export_json(args.dataset, args.images, args.output)
+    export_json(args.dataset, args.output)
