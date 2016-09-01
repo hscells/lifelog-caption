@@ -3,9 +3,9 @@
 #####################################################
 
 # First need to preprocess the data:
-# Arguments: $1=/path/to/dataset.xml $2=number of images to assign to validation data
+# Arguments: $1=/path/to/dataset.xml $2=num validation $3=num test
 echo Preprocessing...
-./preprocess.sh $1 output.json $2
+./preprocess.sh $1 output.json $2 $3
 
 # Next need to train
 echo Training...
