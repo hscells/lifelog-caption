@@ -1,4 +1,4 @@
-import pg8000, sys, os, argparse, json
+import pg8000, sys, os, argparse, json, re
 from xml.dom import minidom
 
 
@@ -30,6 +30,7 @@ def export_json(dataset, images_path, output):
     data = []
     for row in results:
         id, caption = row
+        caption = re.sub(r'(.)\.(.)', r'\1. \2', caption)
         if len(caption.strip()) > 0:
             data.append({'file_path': images_path + lookup[id], 'captions': [caption]})
     cursor.close()
