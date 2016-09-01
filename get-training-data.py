@@ -6,7 +6,7 @@ def innerText(element, name):
     return element.getElementsByTagName(name)[0].firstChild.nodeValue
 
 
-def export_json(dataset, images_path, output):
+def export_json(dataset, output):
     # parse the xml doc into a decent lookup table
     xmldoc = minidom.parse(dataset)
     images = xmldoc.getElementsByTagName('image')
@@ -32,7 +32,7 @@ def export_json(dataset, images_path, output):
         id, caption = row
         caption = re.sub(r'(.)\.(.)', r'\1. \2', caption)
         if len(caption.strip()) > 0:
-            data.append({'file_path': images_path + lookup[id], 'captions': [caption]})
+            data.append({'file_path': 'images/' + lookup[id].split("/")[-1], 'captions': [caption]})
     cursor.close()
 
     with open(output, 'w') as f:
@@ -49,7 +49,6 @@ if __name__ == '__main__':
 
     argparser = argparse.ArgumentParser(description='Creating training dataset')
     argparser.add_argument('dataset', help='The NTCIR lifelog dataset')
-    argparser.add_argument('images', help='The path to the images')
     argparser.add_argument('output', help='The file to output the json data to')
     args = argparser.parse_args()
 
