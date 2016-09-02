@@ -32,7 +32,8 @@ def export_json(dataset, output):
         id, caption = row
         caption = re.sub(r'(.)\.(.)', r'\1. \2', caption)
         if len(caption.strip()) > 0:
-            data.append({'file_path': os.getcwd() + '/neuraltalk2-master/images/' + lookup[id].split("/")[-1], 'captions': [caption]})
+            image_name = lookup[id].split("/")[-1]
+            data.append({'file_path': os.getcwd() + '/neuraltalk2-master/images/' + image_name, 'captions': [caption], 'id': image_name.split('.')[-1]})
     cursor.close()
 
     with open(output, 'w') as f:
