@@ -12,13 +12,12 @@ echo Training...
 d=$(pwd)
 cd $LIFELOG_CLASSIFICATION_DIR
 # This assumes that the neuraltalk2 dir is inside the caption dir
-th train.lua -input_h5 ../data.h5 -input_json ../data.json -gpuid -1 -max_iters 10000
+th train.lua -input_h5 ../data.h5 -input_json ../data.json -gpuid -1 -max_iters 500 -save_checkpoint_every 100
 
 # Whoop, now we can evaluate!
 echo Evaluating...
-th eval.lua -model model_id.json -image_folder ../images -num_images -1 -gpuid -1 -dump_json 1
+th eval.lua -model model_id.json -image_folder images -num_images -1 -gpuid -1 -dump_json 1
 
 echo Done!
 echo You can see the results by running:
 echo cd $LIFELOG_CLASSIFICATION_DIR/vis \&\& python -m SimpleHTTPServer
-
