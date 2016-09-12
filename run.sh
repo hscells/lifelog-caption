@@ -12,7 +12,7 @@ echo Training...
 d=$(pwd)
 cd $LIFELOG_CLASSIFICATION_DIR
 # This assumes that the neuraltalk2 dir is inside the caption dir
-th train.lua -input_h5 ../data.h5 -input_json ../data.json -gpuid -1 -max_iters 500 -save_checkpoint_every 100
+th train.lua -input_h5 ../data.h5 -input_json ../data.json -gpuid -1 -max_iters 50000 -save_checkpoint_every 1000
 
 # Whoop, now we can evaluate!
 echo Evaluating...

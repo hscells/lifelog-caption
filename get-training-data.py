@@ -16,7 +16,6 @@ def export_json(dataset, output):
         id = path.split('/')[-1].split('.')[0]
         lookup[id] = path
 
-
     print("Connecting...")
     conn = pg8000.connect(user=os.environ.get("LIFELOG_DB_USER"),
                           password=os.environ.get("LIFELOG_DB_PASS"),
@@ -32,8 +31,10 @@ def export_json(dataset, output):
         id, caption = row
         caption = re.sub(r'(.)\.(.)', r'\1. \2', caption)
         if len(caption.strip()) > 0:
+            captions = caption.split('.')
             image_name = lookup[id].split("/")[-1]
-            data.append({'file_path': os.getcwd() + '/neuraltalk2-master/images/' + image_name, 'captions': [caption], 'id': image_name.split('.')[0]})
+            data.append({'file_path': os.getcwd() + '/neuraltalk2-master/images/' + image_name,
+                         'captions': captions, 'id': image_name.split('.')[0]})
     cursor.close()
 
     with open(output, 'w') as f:
