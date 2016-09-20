@@ -13,7 +13,15 @@ export CC=/usr/local/bin/gcc-6
 export CXX=/usr/local/bin/g++-6
 
 # I'm using zsh, so you'll need to change `zsh` to `bash` if you're not using zsh.
-curl -s https://raw.githubusercontent.com/torch/ezinstall/master/install-all | zsh
+# apparently the instructions provided by Karpathy to install torch are WRONG:
+#curl -s https://raw.githubusercontent.com/torch/ezinstall/master/install-all | zsh
+
+# The instructions from this address to install torch:
+# http://torch.ch/docs/getting-started.html#_
+# enabled me to load in pre-compiled cpu models
+git clone https://github.com/torch/distro.git ~/torch --recursive
+cd ~/torch; bash install-deps;
+./install.sh
 
 # hopefully you've gotten this far ~
 luarocks install nn
@@ -53,6 +61,14 @@ mkdir model
 cd model
 wget http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_16_layers.caffemodel
 wget https://gist.githubusercontent.com/ksimonyan/211839e770f7b538e2d8/raw/0067c9b32f60362c74f4c445a080beed06b07eb3/VGG_ILSVRC_16_layers_deploy.prototxt
+wget http://cs.stanford.edu/people/karpathy/neuraltalk2/checkpoint_v1_cpu.zip
+unzip checkpoint_v1_cpu.zip
+rm checkpoint_v1_cpu.zip
+cd ../
+
+# add torch binary to path
+cd ~
+echo ". /Users/harry/torch/install/bin/torch-activate" >> .profile
 
 # woo-hoo!
 echo You are all set! You need to use an environment variable for everything else to work. Add the following to your .*shrc:
