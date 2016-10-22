@@ -32,8 +32,10 @@ def export_json(dataset, output):
         caption = re.sub(r'(.)\.(.)', r'\1. \2', caption)
         if len(caption.strip()) > 0:
             captions = caption.split('.')
-            image_name = lookup[id].split("/")[-1]
-            data.append({'file_path': os.getcwd() + '/neuraltalk2-master/images/' + image_name,
+            captions = filter(None, [x.replace(',', '').strip() for x in captions])
+            if len(captions) > 0:
+                image_name = lookup[id].split("/")[-1]
+                data.append({'file_path':'/Volumes/ext/data/ntcir2015_lifelogging/NTCIR_Lifelog_formal_run_Dataset/flat-images/' + image_name,
                          'captions': captions, 'id': image_name.split('.')[0]})
     cursor.close()
 
